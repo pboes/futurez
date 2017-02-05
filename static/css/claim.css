@@ -1,0 +1,75 @@
+
+	body {
+		font-family: 'Raleway', sans-serif;
+		font-size: 35px;
+		height: 100vh;
+	}
+
+	h1 {
+		font-weight: bold;
+	}
+	.row {
+		text-align: center;
+	}
+	.glyphicon-plus-sign {
+		top: 10px;
+		position: fixed;
+		font-size: 50px;
+		right: 20px;
+	}
+
+	.glyphicon-record {
+		top: 10px;
+		position: fixed;
+		font-size: 40px;
+		left: 20px;
+	}
+	.main {
+		text-align:center;
+	}
+	.yes {
+		background-color: #88AB75;
+		color: #fff;
+	}
+	.no {
+		background-color: #DE8F6E;
+		color: #fff;
+	}
+	.skip {
+		background-color: #DBD56E;
+		color: #fff;
+	}
+	.blue {
+		background-color: #2D93AD;
+	}
+	.enterclaim {
+		position:relative;
+		width: 90%;
+		height: 50vh;
+	}
+	.select-btn {
+		font-size: 40px;
+		font-weight: 700;
+		width: 100%;
+		height: 100%;
+		color: #fff;
+		border: none;
+		border-radius: 0;
+	}
+	.select-col {
+		height: 100%;
+		padding: 0;
+	}
+	.enterclaim {
+		word-break: break-word;
+		font-size: 40px;
+		border:none;
+	}
+	span {
+		display: inline-block;
+	vertical-align: middle;
+	}
+
+	.overview_row {
+		padding: 30px;
+	}
