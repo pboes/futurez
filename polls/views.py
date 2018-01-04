@@ -109,12 +109,6 @@ def end_of_line(request):
 	return render(request, 'polls/end_of_line.html')
 
 
-# @login_required()
-# def home(request):
-# 	claims = Claim.objects.all().order_by("time_created").reverse()
-# 	return render(request, 'polls/polls_home.html', {'claims': claims})	
-
-
 @login_required()
 def user_home(request):
 	claims = Claim.objects.filter(user = request.user).order_by("time_created").reverse()
