@@ -1,69 +1,150 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 import json
 
-from .models import Claim
+from .forms import SubmissionForm
+from .models import Claim, Vote, Submission, Report
+from django.conf import settings
 
-def poll(request, no):
-	if no == '':
-		claim = Claim.objects.filter(right_answer = None).order_by("time_created").reverse()[0]
-	else:
-		claim = Claim.objects.get(pk=no)
-	#ClaimForm = modelformset_factory(Claim, fields=('text', 'yes', 'no'))   
+@login_required()
+def poll(request, no=None):
+	possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).exclude(vote__user = request.user).exclude(report__user=request.user).order_by("pk")
+	if no == None:
+		if len(possible_claims) != 0:
+			claim = possible_claims.first()
+			return HttpResponseRedirect(reverse("polls:poll", args=(possible_claims.first().id,)))
+		else:
+			return HttpResponseRedirect(reverse("polls:end_of_line"))
+
 	if request.method == 'POST':
+		claim = Claim.objects.get(pk= no)
+		if "submission" in request.POST:
+			submission_form = SubmissionForm(request.POST)
+			if submission_form.is_valid():
+				submission = submission_form.save(commit = False)
+				submission.user = request.user
+				submission.claim = claim
+				submission.save()
+				
+		else: 
+			claim = Claim.objects.get(pk= no)
+			vote = Vote(user=request.user, claim=claim)
+			if "skip" in request.POST:
+				claim.skip += 1
 
-		#claim_id = int(request.POST['claim-id'])
-		new_claim = Claim.objects.get(pk= no)
-		try:
-			next_claim = Claim.objects.filter(pk__gt = no).filter(right_answer = None).order_by("pk")[0]
-		except:
-			next_claim = Claim.objects.filter(right_answer = None).order_by("pk")[0]
-		print next_claim.id
-		if request.POST.has_key("skip"):
-			return HttpResponseRedirect(reverse("polls:poll", args=(next_claim.id,)))
-		elif request.POST.has_key("yes"):
-			new_claim.yes += 1
-			new_claim.save()
+			elif "yes" in request.POST:
+				claim.yes += 1
+				vote.vote = True
 
-			return HttpResponseRedirect(reverse("polls:poll", args=(next_claim.id,)))
+			elif "no" in request.POST:
+				claim.no += 1
+				vote.vote = False
+			
+			claim.save()
+			vote.save()
+		
+		possible_claims = possible_claims.exclude(pk = no)
+		if len(possible_claims) != 0:
+			next_url = reverse("polls:poll", args=(possible_claims.first().id,))
+		else:
+			next_url = reverse("polls:end_of_line")
 
-		elif request.POST.has_key("no"):
-			new_claim.no += 1
-			new_claim.save()
+		return HttpResponseRedirect(next_url)
 
-			return HttpResponseRedirect(reverse("polls:poll", args=(next_claim.id,)))
+	claim = Claim.objects.get(pk=no)
+	submission_form = SubmissionForm()
+	return render(request, 'polls/poll.html', {'claim': claim, 'form':submission_form})
 
-	else:
-		return render(request, 'polls/poll.html', {'claim': claim})
 
 def add_claim(request):
-    if request.method == 'POST':
-        print request.POST
-        claim = Claim(text= request.POST['text'])
-        claim.save()
-        return HttpResponse(
-                json.dumps(claim.id),
-                content_type="application/json"
-            )
+	if request.method == 'POST':
+		try:
+			claim = Claim(text= request.POST['text'], user=request.user)
+			claim.save()
+			return HttpResponse(
+					json.dumps(claim.id),
+					content_type="application/json"
+				)
+		except:
+			return HttpResponse(
+				json.dumps({"mistake":"mistake"}),
+				content_type="application/json"
+			)
 
-    else:
-        return HttpResponse(
-                json.dumps({"nothing to see": "this isn't happening"}),
-                content_type="application/json"
+	else:
+		return HttpResponse(
+				json.dumps({"nothing to see": "this isn't happening"}),
+				content_type="application/json"
 
-            )
-
-def home(request):
-	claims = Claim.objects.all().order_by("time_created").reverse()
-	return render(request, 'polls/polls_home.html', {'claims': claims})	
-
-
-
+			)
 
 
+def report(request):
+	if request.method == 'POST':
+		claim = Claim.objects.get(pk=request.POST['no'])
+		claim.reported += 1
+		report = Report(claim=claim, user= request.user)
+
+		if claim.reported >= settings.REPORT_LIMIT:
+			claim.blocked = True
+
+		claim.save()
+		report.save()
+		return HttpResponse(
+				json.dumps({"url": "success"}),
+				content_type="application/json"
+			)	
+
+	else:
+		return HttpResponse(
+				json.dumps({"nothing to see": "this isn't happening"}),
+				content_type="application/json"
+			)	
+
+@login_required()
+def end_of_line(request):
+	return render(request, 'polls/end_of_line.html')
 
 
+# @login_required()
+# def home(request):
+# 	claims = Claim.objects.all().order_by("time_created").reverse()
+# 	return render(request, 'polls/polls_home.html', {'claims': claims})	
 
 
+@login_required()
+def user_home(request):
+	claims = Claim.objects.filter(user = request.user).order_by("time_created").reverse()
+	votes = Vote.objects.filter(user = request.user).exclude(vote=None).order_by("pk").reverse()
+	return render(request, 'polls/profile.html', {'claims': claims, 'votes': votes})	
+
+@staff_member_required
+def submissions(request):
+	submissions = Submission.objects.filter(status=True)
+	return render(request, 'polls/submissions_interface.html', {'submissions': submissions})	
+
+def decide(request):
+	if request.method == 'POST':
+		print(request)
+		submission = Submission.objects.get(pk=request.POST['id'])
+		if request.POST['accept']:
+			submission.claim.right_answer = submission.submitted_answer
+			submission.claim.save()
+		
+		submission.status = False
+		submission.save()
+
+		return HttpResponse(
+				json.dumps({"success": "success"}),
+				content_type="application/json"
+			)	
+
+	else:
+		return HttpResponse(
+				json.dumps({"nothing to see": "this isn't happening"}),
+				content_type="application/json"
+			)	
 

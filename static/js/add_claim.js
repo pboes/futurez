@@ -11,14 +11,14 @@ function addClickHandlers() {
 jQuery('.addclaim').on('click', function(event) {
     event.preventDefault();
     var input = $( "#add_claim" ).serializeArray();
-    console.log(input);
    jQuery.ajax({
     url: "/polls/add_claim",
     type: "POST",
     data: {"text":input[1].value,}
        }).done(function(task) {
         console.log(task);
-        window.location.href = task 
+        window.location.href = task
+        console.log("why?")
                   // jQuery('.state_alert').html('<p><strong>Changes have been saved.</strong></p>');
               });
 

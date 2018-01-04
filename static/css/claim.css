@@ -1,37 +1,139 @@
 
 	body {
 		font-family: 'Raleway', sans-serif;
-		font-size: 35px;
-		height: 100vh;
+		font-size: 7vw;
+		height: 100%;
+		text-align:center;
+	}
+
+	p {
+		font-size: 7vw;
+	}
+
+	button {
+		color: #337ab7;
+		margin: 30px;
+		border:none;
+	}
+
+	button > input {
+		background-color: #88AB75;
+		color: #fff;
+		border: none;
+
+	}
+
+	input {
+		border: 3px solid;
 	}
 
 	h1 {
 		font-weight: bold;
 	}
+
+	textarea {
+		position:relative;
+		width: 90%;
+	}
+
+	img {
+		width: 10%;
+		min-width:300px;
+	}
+
+	label {
+		font-weight:normal;
+	}
+
+	.btn.active {
+		color: black;
+	}
+
+	.large-text {
+		font-size: 7vw;
+	}
+
+	.navbarr {
+		height:10vh;
+		padding:10px;
+
+	}
+
+	.poll-div {
+		height: 70vh; 
+		overflow:scroll;
+	}
+
+	.padding_top {
+		padding-top:50px;
+	}
+
 	.row {
 		text-align: center;
 	}
-	.glyphicon-plus-sign {
-		top: 10px;
+
+	.fa-plus-circle {
 		position: fixed;
-		font-size: 50px;
-		right: 20px;
+		font-size: 10vh;
+		top: 10px;
+		right: 2vw;
 	}
 
-	.glyphicon-record {
+	.fa-times-circle {
+		font-size: 10vh;
 		top: 10px;
-		position: fixed;
-		font-size: 40px;
-		left: 20px;
+		display: inline-block;
 	}
+
+	.fa-dot-circle {
+		position: fixed;
+		font-size: 10vh;
+		top: 10px;
+		left: 2vw;
+	}
+
+	.fa-exclamation-circle {
+		position: fixed;
+		font-size: 10vh;
+		top: 10px;
+		left: 25vw;
+	}
+
+	.fa-check-circle {
+		position: fixed;
+		font-size: 10vh;
+		top: 10px;
+		right: 25vw;
+	}
+
+	.fa-arrow-circle-left {
+		position: fixed;
+		font-size: 10vh;
+		/*background: white;*/
+		top: 10px;
+		left: 2vw;
+	}
+
+
+	.nav-tabs > li, .nav-pills > li {
+	    float:none;
+	    display:inline-block;
+	    *display:inline; /* ie7 fix */
+	     zoom:1; /* hasLayout ie7 trigger */
+	}
+
+	.nav-tabs, .nav-pills {
+    text-align:center;
+	}
+
 	.main {
 		text-align:center;
 	}
-	.yes {
+	.green {
 		background-color: #88AB75;
 		color: #fff;
 	}
-	.no {
+	.red {
 		background-color: #DE8F6E;
 		color: #fff;
 	}
@@ -42,13 +144,19 @@
 	.blue {
 		background-color: #2D93AD;
 	}
+
+
+
 	.enterclaim {
 		position:relative;
 		width: 90%;
 		height: 50vh;
+		word-break: break-word;
+		/*font-size: 40px;*/
+		border:none;
 	}
 	.select-btn {
-		font-size: 40px;
+		font-size: inherit;
 		font-weight: 700;
 		width: 100%;
 		height: 100%;
@@ -61,9 +169,7 @@
 		padding: 0;
 	}
 	.enterclaim {
-		word-break: break-word;
-		font-size: 40px;
-		border:none;
+
 	}
 	span {
 		display: inline-block;
@@ -72,4 +178,15 @@
 
 	.overview_row {
 		padding: 30px;
+	}
+
+	.modal-lg {
+		width: inherit;
+		margin:10vw;
+	}
+
+	.tab-pane{
+		height:80vh;
+		overflow-y: scroll;
+		width:100%;
 	}

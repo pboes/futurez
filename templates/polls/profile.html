@@ -1,0 +1,73 @@
+{% extends "polls/base-logged.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="navbarr">
+
+<a href="{% url 'logout' %}"><i class="fas fa-arrow-circle-left"></i></a>
+
+<a href="{% url 'polls:poll' %}"><i class="fas fa-times-circle"></i></a>
+
+
+</div>
+		<div class="padding_top">
+	<div class="row">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a href="#claims" aria-controls="claims" role="tab" data-toggle="tab">Your claims</a></li>
+			<li role="presentation"><a href="#votes" aria-controls="votes" role="tab" data-toggle="tab">Your votes</a></li>
+<!-- 			<li role="presentation"><a href="#stats" aria-controls="stats" role="tab" data-toggle="tab">Stats</a></li> -->
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="claims">
+				
+				{% for claim in claims %}
+					
+					<div class="row overview_row">
+						<div class="col-xs-2 col-sm-2 col-md-2 green" >
+							{{claim.yes}}
+						</div>
+						<a href="{% url 'polls:poll' claim.id %}">
+							<div class="col-xs-8 col-sm-8 col-md-8">
+								{{claim.text}}
+								
+							</div>
+						</a>
+						<div class="col-xs-2 col-sm-2 col-md-2 red">
+							{{claim.no}}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div role="tabpanel" class="tab-pane" id="votes">
+				
+
+			<p>#yes/#no, back: your vote</p>
+
+				{% for vote in votes %}
+					
+					<div class="row overview_row">
+						<a href="{% url 'polls:poll' vote.claim.id %}">
+							<div class="col-xs-9 col-sm-9 col-md-9">
+								{{vote.claim.text}}
+							</div>
+						</a>
+						{% if vote.vote %}
+							<div class="col-xs-3 col-sm-3 col-md-3 green">{{vote.claim.yes}} / {{vote.claim.no}}
+							</div>
+							{% elif not vote.vote%}
+							<div class="col-xs-3 col-sm-3 col-md-3 red ">{{vote.claim.yes}} / {{vote.claim.no}}
+							</div>
+						{% else %}
+							<div class="col-xs-3 col-sm-3 col-md-3 box">
+							</div>
+						{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+				<!--<div role="tabpanel" class="tab-pane" id="stats">...</div>-->
+			</div>
+
+		</div>
+	{% endblock content %}

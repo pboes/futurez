@@ -1,0 +1,14 @@
+{% extends "polls/base-logged.html" %}
+{% block content %}
+	<div class="row">
+
+				<div class="main">
+					<span style="padding:20%;">Sorry, you've voted on all open claims.</span>
+				</div>
+
+	</div>
+
+	<a href="{% url 'polls:user_home' %}"><i class="fas fa-dot-circle"></i></a>
+
+
+{% endblock content %}

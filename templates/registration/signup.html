@@ -1,0 +1,33 @@
+{% extends 'polls/base.html' %}
+{% block content-base %}
+	<div class="navbarr">
+	</div>
+	<div class="padding_top">
+		<div class="row">
+			<div class="col-12">
+				<strong>Sign Up</strong>
+			</div>
+		</div>
+			<div class="navbarr">
+	</div>
+		<div class="row">
+			<div class="col-12">
+				<form method="post">
+					{% csrf_token %}
+					{% for field in form %}
+						<p>
+							{{ field.label_tag }}<br>
+							{{ field }}
+							<!--         {% if field.help_text %}
+								<small style="color: grey">{{ field.help_text }}</small>
+							{% endif %} -->
+							{% for error in field.errors %}
+								<p style="color: red">{{ error }}</p>
+							{% endfor %}
+						</p>
+					{% endfor %}
+					<button type="submit">Sign up</button>
+				</form>
+			</div>
+		</div>
+	{% endblock %}
