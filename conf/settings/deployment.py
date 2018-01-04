@@ -30,9 +30,9 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 
-#CURRENT_DOMAIN = 'http://www.scope.ai'
+#CURRENT_DOMAIN = ''
 
-#ADMINS = ('GRPHT', 'grphtcontact@gmail.com', 'admin@scope.ai')
+#ADMINS = ('')
 
 INSTALLED_APPS += (
 )
@@ -42,14 +42,9 @@ INSTALLED_APPS += (
 #     "base_click_tracking_url": CURRENT_DOMAIN + "/click/",
 # }
 
-LOCKDOWN_PASSWORDS = ('scope2016')
+LOCKDOWN_PASSWORDS = ('')
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-LOCKDOWN_URL_EXCEPTIONS = (
-    r'^/$',
-    r'pydata$',
-    # r'lichtenfels$',
-    r'contact$'
-    )
+LOCKDOWN_URL_EXCEPTIONS = ()
 
 # DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #                          'NAME': im.get_env_variable('DATABASE_NAME'),
