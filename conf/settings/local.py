@@ -19,6 +19,14 @@ DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
                          'HOST': 'localhost',
                          'PORT': ''}}
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+
 # PYTRACKING_CONFIGURATION = {
 #     "base_open_tracking_url": CURRENT_DOMAIN + "/open/",
 #     "base_click_tracking_url": CURRENT_DOMAIN + "/click/",
