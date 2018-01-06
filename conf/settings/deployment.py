@@ -21,7 +21,7 @@ im = ImportGlobal()
 
 DEBUG = False
 X_FRAME_OPTIONS = 'DENY'
-ALLOWED_HOSTS += ['claim-and-wonder.herokuapp.com']
+ALLOWED_HOSTS += ['claim-and-wonder.herokuapp.com', '*']
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = True
 SECURE_BROWSER_XSS_FILTER = True
