@@ -32,7 +32,7 @@ CSRF_COOKIE_SECURE = True
 
 #CURRENT_DOMAIN = ''
 
-ADMINS = (('Paul', 'pvboes@gmail.com'))
+ADMINS = [('Paul', 'pvboes@gmail.com')]
 
 INSTALLED_APPS += (
 )
