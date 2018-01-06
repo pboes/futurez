@@ -63,4 +63,4 @@ LOCKDOWN_URL_EXCEPTIONS = ()
 import django_heroku
 django_heroku.settings(locals())
 
-STATICFILES_STORAGE = None
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
