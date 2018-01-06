@@ -99,6 +99,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+##EMAIL
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pvboes@gmail.com'
+EMAIL_HOST_PASSWORD = '2+3Isfive'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+SERVER_EMAIL = EMAIL_HOST_USER
+
 
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = '/polls/profile'
