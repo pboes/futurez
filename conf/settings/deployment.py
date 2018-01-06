@@ -53,7 +53,7 @@ LOCKDOWN_URL_EXCEPTIONS = ()
 #                          'HOST': 'localhost',
 #                          'PORT': ''}}
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Configure Django App for Heroku.
 import django_heroku
