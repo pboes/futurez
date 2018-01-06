@@ -1,16 +1,13 @@
 {% extends 'polls/base.html' %}
 {% block content-base %}
-	<div class="navbarr">
-	</div>
-	<div class="padding_top">
+	<div class="signup">
 		<div class="row">
 			<div class="col-12">
 				<strong>Sign Up</strong>
 			</div>
 		</div>
-			<div class="navbarr">
-	</div>
-		<div class="row">
+<p></p>
+		<div class="row scroll">
 			<div class="col-12">
 				<form method="post">
 					{% csrf_token %}
@@ -26,7 +23,13 @@
 							{% endfor %}
 						</p>
 					{% endfor %}
-					<button type="submit">Sign up</button>
+<div style="margin-top:5vh; margin-bottom:5vh">
+  <button class="btn-lg green large-text" type="submit">Sign up</button>
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+
+
+					
 				</form>
 			</div>
 		</div>

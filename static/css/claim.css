@@ -1,20 +1,28 @@
 
-	body {
+	html, body {
+		position: relative;
+		overflow: hidden;
 		font-family: 'Raleway', sans-serif;
-		font-size: 7vw;
+		font-size: 5vh;
 		height: 100%;
 		text-align:center;
 	}
 
-	p {
-		font-size: 7vw;
+/*	html {
+	position: relative;
+	overflow: hidden;
+	height: 100%;
 	}
+	* {
+	margin: 0;
+	padding: 0;
+	}*/
 
-	button {
-		color: #337ab7;
-		margin: 30px;
-		border:none;
-	}
+
+/*	p {
+		font-size: 7vw;
+	}*/
+
 
 	button > input {
 		background-color: #88AB75;
@@ -41,8 +49,24 @@
 		min-width:300px;
 	}
 
+	form {
+		height:inherit;
+		/*overflow:scroll;*/
+	}
+
 	label {
 		font-weight:normal;
+	}
+
+
+	.report {
+		color: #337ab7;
+		margin: 30px;
+		border:none;
+	}
+
+	.scroll {
+		overflow: scroll;
 	}
 
 	.btn.active {
@@ -50,7 +74,7 @@
 	}
 
 	.large-text {
-		font-size: 7vw;
+		font-size: 7vh;
 	}
 
 	.navbarr {
@@ -64,8 +88,20 @@
 		overflow:scroll;
 	}
 
-	.padding_top {
+	.poll-text {
+		display: flex;
+	    align-items: center;
+	    margin-left: 10vw;
+	    margin-right: 10vw;
+	    height: inherit;
+	}
+
+/*	.padding_top {
 		padding-top:50px;
+	}*/
+
+	.col {
+		height:inherit;
 	}
 
 	.row {
@@ -145,8 +181,6 @@
 		background-color: #2D93AD;
 	}
 
-
-
 	.enterclaim {
 		position:relative;
 		width: 90%;
@@ -163,17 +197,17 @@
 		color: #fff;
 		border: none;
 		border-radius: 0;
+		margin: none;
 	}
 	.select-col {
 		height: 100%;
 		padding: 0;
 	}
-	.enterclaim {
 
-	}
-	span {
-		display: inline-block;
-	vertical-align: middle;
+	.signup {
+		overflow-y: scroll;
+		padding-top:5vh;
+		height:100vh;
 	}
 
 	.overview_row {

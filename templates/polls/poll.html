@@ -1,18 +1,6 @@
 {% extends "polls/base-logged.html" %}
 {% load staticfiles %}
 {% block style %}
-	<style>
-		html {
-	position: relative;
-	overflow: hidden;
-	height: 100%;
-	}
-	* {
-	margin: 0;
-	padding: 0;
-	}
-	</style>
-
 {% endblock style %}
 
 {% block content %}
@@ -26,17 +14,10 @@
 		{% csrf_token %}
 		
 			
-			<div class="col-md-12">
+			<div class="col col-md-12">
 				
-				<div class="main">
+<div class="poll-text">{{claim.text}}</div>
 
-					<p>
-						
-<span style="padding:20%;">{{claim.text}}</span>
-
-					</p>
-					
-				</div>
 			</div>
 		</div>
 		<div class="row" style="height: 20vh;">
