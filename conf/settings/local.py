@@ -7,6 +7,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1']
 CURRENT_DOMAIN = 'http://127.0.0.1:8000'
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = im.get_env_variable('SECRET_KEY')
+
 #SITE_ID = 1
 
 DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
