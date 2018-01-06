@@ -1,1 +1,1 @@
-web: gunicorn claim_and_wonder.wsgi:application --log-file -
+web: gunicorn claim_and_wonder.wsgi --log-file -
