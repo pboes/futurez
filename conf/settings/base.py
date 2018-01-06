@@ -118,7 +118,7 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 
 LOGIN_URL = "/accounts/login/"
-LOGIN_REDIRECT_URL = '/polls'
+LOGIN_REDIRECT_URL = '/polls/'
 
 REPORT_LIMIT = 10
 
