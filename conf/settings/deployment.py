@@ -19,7 +19,7 @@ from conf.settings.base import *
 
 im = ImportGlobal()
 
-DEBUG = True
+DEBUG = False
 X_FRAME_OPTIONS = 'DENY'
 ALLOWED_HOSTS += ['claim-and-wonder.herokuapp.com']
 SECURE_CONTENT_TYPE_NOSNIFF = True
