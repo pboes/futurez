@@ -86,12 +86,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                         'NAME': '',
-                         'USER': '',
-                         'PASSWORD': '',
-                         'HOST': 'localhost',
-                         'PORT': ''}}
+# DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#                          'NAME': '',
+#                          'USER': '',
+#                          'PASSWORD': '',
+#                          'HOST': 'localhost',
+#                          'PORT': ''}}
 
 
 
