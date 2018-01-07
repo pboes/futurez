@@ -1,63 +1,42 @@
 {% extends "polls/base.html" %}
-
 {% block content-base %}
-
-<div class="row" style="padding: 5%;padding-top:10vh; ">
-  
-
-<div class="col-md-12">
-
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-
-{% else %}
-
-    {% if next %}
-        {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
-        {% else %}
-        <p>Please login to see this page.</p>
+  <div class="row" style="padding: 5%;padding-top:10vh; ">
+    
+    <div class="col-md-12">
+      {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+      {% else %}
+        {% if next %}
+          {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+          {% else %}
+            <p>Please login to see this page.</p>
+          {% endif %}
         {% endif %}
-
-    {% endif %}
-
-{% endif %}
-
-<form style="padding-top:5vh;" method="post" action="{% url 'login' %}">
-{% csrf_token %}
-
-<div>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</div>
-<div>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</div>
-
-<div style="margin-top:10vh; margin-bottom:10vh">
-  <button class="btn-lg green large-text" >
-    <input type="submit" value="Login" /> 
-  </button>
-  
-  <input type="hidden" name="next" value="{{ next }}" />
-</div>
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<!-- <p style="padding:20%"><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
-
-<p><a href="{% url 'conf:signup' %}">Create Account</a></p>
-
-
-  
-</div>
-
-
-
-</div>
-
-
-
+      {% endif %}
+      <form style="padding-top:5vh;" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div>
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+        </div>
+        <div>
+          <td>{{ form.password.label_tag }}</td>
+          <td>{{ form.password }}</td>
+        </div>
+        <div style="margin-top:10vh; margin-bottom:10vh">
+          <button class="btn-lg green large-text" >
+          <input type="submit" value="Login" />
+          </button>
+          
+          <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+      </form>
+      {# Assumes you setup the password_reset view in your URLconf #}
+      <!-- <p style="padding:20%"><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+      <p><a href="{% url 'conf:signup' %}">Create Account</a></p>
+      
+    </div>
+  </div>
 {% endblock %}

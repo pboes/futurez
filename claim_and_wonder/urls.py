@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
-from polls.views import user_home
+from polls.views import landing
 
 urlpatterns = [
     path(r'conf/', include(('conf.urls', "conf"), namespace="conf")),
@@ -23,7 +23,7 @@ urlpatterns = [
     path(r'admin/', admin.site.urls),
     path(r'captcha/', include('captcha.urls')),
     path(r'polls/', include(('polls.urls', "polls"), namespace="polls")),#, "polls")),#, namespace="polls")),
-    path(r'', user_home),
+    path(r'', landing),
     
 
 ]

@@ -9,6 +9,13 @@ from .forms import SubmissionForm
 from .models import Claim, Vote, Submission, Report
 from django.conf import settings
 
+
+def landing(request):
+	if request.user.is_authenticated:
+		return HttpResponseRedirect(reverse("polls:poll"))
+	return render(request, 'polls/landing.html')
+
+
 @login_required()
 def poll(request, no=None):
 	possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).exclude(vote__user = request.user).exclude(report__user=request.user).order_by("pk")
