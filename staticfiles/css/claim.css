@@ -58,7 +58,7 @@
 	}
 
 	form {
-		height:inherit;
+		height:100%;
 		/*overflow:scroll;*/
 	}
 
@@ -95,13 +95,13 @@
 	}
 
 	.navbarr {
-		height:10vh;
+		height:10%;
 		padding:10px;
 
 	}
 
 	.poll-div {
-		height: 70vh; 
+		height: 70%; 
 		overflow:scroll;
 	}
 
@@ -110,7 +110,7 @@
 	    align-items: center;
 	    margin-left: 10vw;
 	    margin-right: 10vw;
-	    height: inherit;
+	    height:inherit;
 	}
 
 /*	.padding_top {
@@ -127,41 +127,41 @@
 
 	.fa-plus-circle {
 		position: fixed;
-		font-size: 10vh;
+		font-size: 150%;
 		top: 10px;
 		right: 2vw;
 	}
 
 	.fa-times-circle {
-		font-size: 10vh;
+		font-size: 150%;
 		top: 10px;
 		display: inline-block;
 	}
 
 	.fa-dot-circle {
 		position: fixed;
-		font-size: 10vh;
+		font-size: 150%;
 		top: 10px;
 		left: 2vw;
 	}
 
 	.fa-exclamation-circle {
 		position: fixed;
-		font-size: 10vh;
+		font-size: 150%;
 		top: 10px;
 		left: 25vw;
 	}
 
 	.fa-check-circle {
 		position: fixed;
-		font-size: 10vh;
+		font-size: 150%;
 		top: 10px;
 		right: 25vw;
 	}
 
 	.fa-arrow-circle-left {
 		position: fixed;
-		font-size: 10vh;
+		font-size: 150%;
 		/*background: white;*/
 		top: 10px;
 		left: 2vw;
@@ -181,6 +181,7 @@
 
 	.main {
 		text-align:center;
+		height: 80vh;
 	}
 	.green {
 		background-color: #88AB75;
@@ -237,7 +238,7 @@
 	}
 
 	.tab-pane{
-		height:80vh;
+		height:70vh;
 		overflow-y: scroll;
 		width:100%;
 	}

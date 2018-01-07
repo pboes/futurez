@@ -1,6 +1,6 @@
 {% extends "polls/base.html" %}
 {% block content-base %}
-  <div class="row" style="padding: 5%;padding-top:10vh; ">
+  <div class="row" style="padding: 5%;">
     
     <div class="col-md-12">
       {% if form.errors %}
@@ -15,7 +15,7 @@
           {% endif %}
         {% endif %}
       {% endif %}
-      <form style="padding-top:5vh;" method="post" action="{% url 'login' %}">
+      <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div>
           <td>{{ form.username.label_tag }}</td>
