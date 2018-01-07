@@ -23,12 +23,20 @@
 		font-size: 7vw;
 	}*/
 
+	p {
+		padding: 20px;
+		margin: 20px;
+	}
 
 	button > input {
 		background-color: #88AB75;
-		color: #fff;
 		border: none;
 
+	}
+
+
+	button, button > a{
+		color:#fff !important;
 	}
 
 	input {
@@ -56,6 +64,11 @@
 
 	label {
 		font-weight:normal;
+	}
+
+	.landing {
+		font-size:3vh;
+		overflow-y: scroll;
 	}
 
 
