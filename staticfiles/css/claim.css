@@ -106,7 +106,7 @@
 	}
 
 	.poll-text {
-		display: flex;
+		display: grid;
 	    align-items: center;
 	    margin-left: 10vw;
 	    margin-right: 10vw;
