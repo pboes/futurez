@@ -226,6 +226,7 @@
 		overflow-y: scroll;
 		padding-top:5vh;
 		height:100vh;
+		padding-bottom: 20vh;
 	}
 
 	.overview_row {
