@@ -41,6 +41,7 @@
 
 	input {
 		border: 3px solid;
+		max-width: 90vw;
 	}
 
 	h1 {
@@ -225,8 +226,7 @@
 	.signup {
 		overflow-y: scroll;
 		padding-top:5vh;
-		height:100vh;
-		padding-bottom: 20vh;
+		/*height:100vh;*/
 	}
 
 	.overview_row {

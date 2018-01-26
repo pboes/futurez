@@ -8,7 +8,7 @@ from django.dispatch import receiver
 # Create your models here.
 class Claim(models.Model):
 
-	text = models.TextField(max_length=200)
+	text = models.TextField(max_length=200, blank=False)
 	time_created = models.DateTimeField(auto_now_add=True)
 	right_answer = models.NullBooleanField()
 	yes = models.IntegerField(default=0)
