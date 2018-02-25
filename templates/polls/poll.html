@@ -35,12 +35,15 @@
 	
 </form>
 
+{% if request.user.is_authenticated %}
+
 		<a href="{% url 'polls:user_home' %}"><i class="fas fa-dot-circle"></i></a>
 
 		<button type="button" class="report"><i class="fas fa-exclamation-circle"></i></button>
 
 <a href="#" data-toggle="modal" data-target=".submission"><i class="fas fa-check-circle"></i>
 			</a>
+
 
 		<!-- Large modal -->
 		<div class="modal fade bs-example-modal-lg submission" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -96,13 +99,38 @@
     <div class="modal-content">
       You have reported this claim. Once a certain number of users report a claim, it will automatically be removed. Check the guidelines for reporting for more information.
 
-	<button>
+	<button class="btn-lg green large-text" >
 		<a href="{% url 'polls:poll' %}">Go to next claim</a>
 	</button>
 
     </div>
   </div>
 </div>
+
+
+{% else %}
+
+<a href="#" data-toggle="modal" data-target="#profilemodal"><i class="fas fa-dot-circle"></i>
+			</a>
+
+<div class="modal fade bd-example-modal-lg" id="profilemodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      In order to get access to profile features, you need to sign up. With a profile, you can check how others voted on your claims, review claims on which you have voted, and more. 
+
+	<button class="btn-lg green large-text" >
+		<a href="{% url 'conf:signup' %}">Sign up</a>
+	</button>
+
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+
+
 
 {% endblock content %}
 
@@ -126,6 +154,7 @@ jQuery('.report').on('click', function(event) {
        });
 
   });
+
 
 }
 	</script>	

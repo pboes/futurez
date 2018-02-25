@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 import json
+from random import randint, choice
 
 from .forms import SubmissionForm
 from .models import Claim, Vote, Submission, Report
@@ -15,16 +16,24 @@ def landing(request):
 		return HttpResponseRedirect(reverse("polls:poll"))
 	return render(request, 'polls/landing.html')
 
-
-@login_required()
+# @login_required()
 def poll(request, no=None):
-	possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).exclude(vote__user = request.user).exclude(report__user=request.user).order_by("pk")
-	if no == None:
-		if len(possible_claims) != 0:
-			claim = possible_claims.first()
-			return HttpResponseRedirect(reverse("polls:poll", args=(possible_claims.first().id,)))
-		else:
-			return HttpResponseRedirect(reverse("polls:end_of_line"))
+	if request.user.is_authenticated:
+		possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).exclude(vote__user = request.user).exclude(report__user=request.user).order_by("pk")
+		sam = 0
+		if no == None:
+			if len(possible_claims) != 0:
+				claim = possible_claims.first()
+				return HttpResponseRedirect(reverse("polls:poll", args=(possible_claims.first().id,)))
+			else:
+				return HttpResponseRedirect(reverse("polls:end_of_line"))
+
+	else: 
+		possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).order_by("pk")
+		sam = randint(0,len(possible_claims)-1)
+		if no == None:	
+			claim = possible_claims[sam]
+			return HttpResponseRedirect(reverse("polls:poll", args=(claim.id,)))
 
 	if request.method == 'POST':
 		claim = Claim.objects.get(pk= no)
@@ -55,7 +64,7 @@ def poll(request, no=None):
 		
 		possible_claims = possible_claims.exclude(pk = no)
 		if len(possible_claims) != 0:
-			next_url = reverse("polls:poll", args=(possible_claims.first().id,))
+			next_url = reverse("polls:poll", args=(possible_claims[sam].id,))
 		else:
 			next_url = reverse("polls:end_of_line")
 
@@ -69,12 +78,16 @@ def poll(request, no=None):
 def add_claim(request):
 	if request.method == 'POST':
 		try:
-			claim = Claim(text= request.POST['text'], user=request.user)
-			claim.save()
-			return HttpResponse(
-					json.dumps(claim.id),
-					content_type="application/json"
-				)
+			if request.user.is_authenticated:
+				claim = Claim(text= request.POST['text'], user=request.user)
+			else:
+				claim = Claim(text= request.POST['text'], user=None)
+				claim.save()
+				return HttpResponse(
+						json.dumps(claim.id),
+						content_type="application/json"
+					)
+
 		except:
 			return HttpResponse(
 				json.dumps({"mistake":"mistake"}),
@@ -111,7 +124,7 @@ def report(request):
 				content_type="application/json"
 			)	
 
-@login_required()
+# @login_required()
 def end_of_line(request):
 	return render(request, 'polls/end_of_line.html')
 

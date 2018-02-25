@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+#from django.db.models.signals import post_save
+#from django.dispatch import receiver
 
 # Create your models here.
 class Claim(models.Model):
@@ -22,7 +22,7 @@ class Claim(models.Model):
 		return self.text
 
 class Vote(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
 	claim = models.ForeignKey(Claim, on_delete=models.CASCADE)
 	vote = models.NullBooleanField()
 
