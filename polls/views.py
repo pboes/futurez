@@ -18,22 +18,25 @@ def landing(request):
 
 # @login_required()
 def poll(request, no=None):
+	#determine next claim
+	possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None)
+	sam = 0
+
 	if request.user.is_authenticated:
-		possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).exclude(vote__user = request.user).exclude(report__user=request.user).order_by("pk")
-		sam = 0
-		if no == None:
-			if len(possible_claims) != 0:
-				claim = possible_claims.first()
-				return HttpResponseRedirect(reverse("polls:poll", args=(possible_claims.first().id,)))
-			else:
-				return HttpResponseRedirect(reverse("polls:end_of_line"))
+		possible_claims = possible_claims.exclude(vote__user = request.user).exclude(report__user=request.user).order_by("pk")
+
+	else:
+		sam = randint(0,len(possible_claims)-1)
+
+	if len(possible_claims) != 0:
+		next_claim = possible_claims[sam]
+		next_url = reverse("polls:poll", args=(next_claim.id,))
 
 	else: 
-		possible_claims = Claim.objects.filter(blocked=False).filter(right_answer = None).order_by("pk")
-		sam = randint(0,len(possible_claims)-1)
-		if no == None:	
-			claim = possible_claims[sam]
-			return HttpResponseRedirect(reverse("polls:poll", args=(claim.id,)))
+		next_url = reverse("polls:end_of_line")
+
+	if no == None:
+		return HttpResponseRedirect(next_url)
 
 	if request.method == 'POST':
 		claim = Claim.objects.get(pk= no)
@@ -44,38 +47,53 @@ def poll(request, no=None):
 				submission.user = request.user
 				submission.claim = claim
 				submission.save()
-				
-		else: 
-			claim = Claim.objects.get(pk= no)
-			if "yes" in request.POST:
-				claim.yes += 1
-
-			elif "no" in request.POST:
-				claim.no += 1
-
-			claim.save()
-				
-			if request.user.is_authenticated:
-				vote = Vote(user=request.user, claim=claim)
-				if "yes" in request.POST:
-					vote.vote = True
-
-				elif "no" in request.POST:
-					vote.vote = False
-				vote.save()
-			
-		
-		possible_claims = possible_claims.exclude(pk = no)
-		if len(possible_claims) != 0:
-			next_url = reverse("polls:poll", args=(possible_claims[sam].id,))
-		else:
-			next_url = reverse("polls:end_of_line")
 
 		return HttpResponseRedirect(next_url)
 
 	claim = Claim.objects.get(pk=no)
 	submission_form = SubmissionForm()
-	return render(request, 'polls/poll.html', {'claim': claim, 'form':submission_form})
+	return render(request, 'polls/poll.html', {'claim': claim, 'form':submission_form, 'next_url':next_url})
+
+
+def vote(request):
+	if request.method == 'POST':
+		try:
+			claim = Claim.objects.get(pk= request.POST['no'])
+			answer = request.POST['answer']
+			if answer == 'yes':
+				claim.yes += 1
+
+			elif answer == 'no':
+				claim.no += 1
+
+			claim.save()
+
+			if request.user.is_authenticated:
+				vote = Vote(user=request.user, claim=claim)
+				if answer =="yes":
+					vote.vote = True
+
+				elif answer == "no":
+					vote.vote = False
+				vote.save()
+
+			return HttpResponse(
+						json.dumps({"yes":claim.yes, "no":claim.no }),
+						content_type="application/json"
+					)
+
+		except:
+			return HttpResponse(
+				json.dumps({"mistake":"mistake"}),
+				content_type="application/json"
+			)
+
+	else:
+		return HttpResponse(
+				json.dumps({"nothing to see": "this isn't happening"}),
+				content_type="application/json"
+
+			)	
 
 
 def add_claim(request):
@@ -85,11 +103,11 @@ def add_claim(request):
 				claim = Claim(text= request.POST['text'], user=request.user)
 			else:
 				claim = Claim(text= request.POST['text'], user=None)
-				claim.save()
-				return HttpResponse(
-						json.dumps(claim.id),
-						content_type="application/json"
-					)
+			claim.save()
+			return HttpResponse(
+					json.dumps(claim.id),
+					content_type="application/json"
+				)
 
 		except:
 			return HttpResponse(

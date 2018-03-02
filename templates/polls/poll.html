@@ -2,133 +2,99 @@
 {% load staticfiles %}
 {% block style %}
 {% endblock style %}
-
 {% block content %}
 	
-<div class="row poll-div">
-
-	<form action="{% url 'polls:poll' claim.id %}" method="post">
-		<input type="hidden" name="claim-id" value="{{claim.id}}">
-		{% csrf_token %}
-		
+	<div class="row poll-div">
+<!-- 		<form action="{% url 'polls:poll' claim.id %}" method="post">
+			<input type="hidden" name="claim-id" value="{{claim.id}}">
+			{% csrf_token %} -->
+			
 			
 			<div class="col col-md-12">
 				
-<div class="poll-text">{{claim.text}}</div>
-
+				<div class="poll-text">{{claim.text}}</div>
 			</div>
-
-	</div>
-
-<button type="submit" name="yes"><i class="fas fa-check-circle yes-circle"></i></button>
-
-<button type="submit" name="no" ><i class="fas fa-times-circle no-circle"></i></button>
-
-<!-- 		<div class="row" style="height: 20%;">
-			<div class="col-xs-4 col-sm-4 col-md-4 select-col">
-				<button class="select-btn btn-lg green" type="submit" name="yes"/><i class="fas fa-check fa-2x"></i></button>
-			</div>
-			<div class="col-xs-4 col-sm-4 col-md-4 select-col">
-				<button class="select-btn btn-lg skip" type="submit" name="skip"/><i class="fas fa-chevron-right fa-2x"></i></button>
-			</div>
-			<div class="col-xs-4 col-sm-4 col-md-4 select-col">
-				<button class="select-btn btn-lg red" type="submit" name="no"/><i class="fas fa-times fa-2x"></i></button>
-			</div>
-		</div> -->
-
-</form>
-
-{% if request.user.is_authenticated %}
-
+		</div>
+		<!-- 		<div class="row" style="height: 20%;">
+				<div class="col-xs-4 col-sm-4 col-md-4 select-col">
+						<button class="select-btn btn-lg green" type="submit" name="yes"/><i class="fas fa-check fa-2x"></i></button>
+				</div>
+				<div class="col-xs-4 col-sm-4 col-md-4 select-col">
+						<button class="select-btn btn-lg skip" type="submit" name="skip"/><i class="fas fa-chevron-right fa-2x"></i></button>
+				</div>
+				<div class="col-xs-4 col-sm-4 col-md-4 select-col">
+						<button class="select-btn btn-lg red" type="submit" name="no"/><i class="fas fa-times fa-2x"></i></button>
+				</div>
+		</div> 
+	</form>-->
+	<button type="button" class="yes"><i class="fas fa-check-circle yes-circle"></i></button>
+	<button type="button" class="no" ><i class="fas fa-times-circle no-circle"></i></button>
+	{% if request.user.is_authenticated %}
 		<a href="{% url 'polls:user_home' %}"><i class="fas fa-home"></i></a>
-
-{% else %}
-
-<a href="#" data-toggle="modal" data-target="#profilemodal"><i class="fas fa-home"></i>
-			</a>
-
-<div class="modal fade bd-example-modal-lg" id="profilemodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-    	<p style="font-size:3vh;">
-    		      In order to get access to profile features, you need to log in or sign up. With a profile, you can check how others voted on your claims, review claims on which you have voted, and more. Do it, we don't ask for an email!
-
-	
-<div class="row">	
-
-<div class="col-md-12 col-lg-6">
-
-	<button class="btn green large-text" >
-		<a href="{% url 'conf:signup' %}">Sign up</a>
-	</button>
-
-</div>
-
-<p></p>
-
-<div class="col-md-12 col-lg-6">
-
-	<button class="btn blue large-text" >
-		<a href="{% url 'login' %}">Login</a>
-	</button>
-</div>
-
-
-</div>
-
-    	</p>
-
-
-    </div>
-  </div>
-</div>
-
-{% endif %}
-
-
-		<button type="button" class="report"><i class="fas fa-exclamation"></i></button>
-
-<a href="#" data-toggle="modal" data-target=".submission"><i class="fas fa-lightbulb"></i>
-			</a>
-
-
-		<!-- Large modal -->
-		<div class="modal fade bs-example-modal-lg submission" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-			<div class="modal-dialog modal-lg" role="document" style="height:70vh;">
+	{% else %}
+		<a href="#" data-toggle="modal" data-target="#profilemodal"><i class="fas fa-home"></i>
+		</a>
+		<div class="modal fade bd-example-modal-lg" id="profilemodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<div class="row">
-						<div class="col-md-12">
-							<strong>Submit decision</strong>
+					<p style="font-size:3vh;">
+						In order to get access to profile features, you need to log in or sign up. With a profile, you can check how others voted on your claims, review claims on which you have voted, and more. Do it, we don't ask for an email!
+						
+						<div class="row">
+							<div class="col-md-12 col-lg-6">
+								<button class="btn green large-text" >
+								<a href="{% url 'conf:signup' %}">Sign up</a>
+								</button>
+							</div>
+							<p></p>
+							<div class="col-md-12 col-lg-6">
+								<button class="btn blue large-text" >
+								<a href="{% url 'login' %}">Login</a>
+								</button>
+							</div>
 						</div>
-
-						<div class="col-md-12">
-							<form action="{% url 'polls:poll' claim.id %}" id="add_submission" method="post">	
+					</p>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	<button type="button" class="report"><i class="fas fa-exclamation"></i></button>
+	<a href="#" data-toggle="modal" data-target=".submission"><i class="fas fa-lightbulb"></i>
+	</a>
+	<!-- Large modal -->
+	<div class="modal fade bs-example-modal-lg submission" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document" style="height:70vh;">
+			<div class="modal-content">
+				<div class="row">
+					<div class="col-md-12">
+						<p style="font-size:3vh;">Do you think this claim has been decided? Submit the evidence here.</p>
+					</div>
+					<div class="col-md-12">
+						<form action="{% url 'polls:poll' claim.id %}" id="add_submission" method="post">
 							{% csrf_token %}
-
-{{ form.non_field_errors }}
-<div class="form-group">
-    {{ form.submitted_answer.errors }}
-    <label for="{{ form.submitted_answer.id_for_label }}">Submitted Answer:</label>
-<div class="btn-group" data-toggle="buttons">
-  <label class="select-btn btn btn-secondary active green">
-    <input type="radio" name="submitted_answer" id="id_submitted_answer_0" autocomplete="off" checked> Correct
-  </label>
-  <label class="select-btn btn btn-secondary red">
-    <input type="radio" name="submitted_answer" id="id_submitted_answer_1" autocomplete="off"> False
-  </label>
-</div>
-</div>
-<div class="form-group">
-    {{ form.evidence.errors }}
-    <label for="{{ form.evidence.id_for_label }}">Evidence:</label>
-    {{ form.evidence}}
-</div>
-<div class="form-group">
-    {{ form.comments.errors }}
-    <label for="{{ form.comment.id_for_label }}">Comments:</label>
-    {{ form.comment}}
-</div>
-
+							{{ form.non_field_errors }}
+							<div class="form-group">
+								{{ form.submitted_answer.errors }}
+								<label for="{{ form.submitted_answer.id_for_label }}">Submitted Answer:</label>
+								<div class="btn-group" data-toggle="buttons">
+									<label class="select-btn btn btn-secondary active green">
+										<input type="radio" name="submitted_answer" id="id_submitted_answer_0" autocomplete="off" checked> Correct
+									</label>
+									<label class="select-btn btn btn-secondary red">
+										<input type="radio" name="submitted_answer" id="id_submitted_answer_1" autocomplete="off"> False
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								{{ form.evidence.errors }}
+								<label for="{{ form.evidence.id_for_label }}">Evidence:</label>
+								{{ form.evidence}}
+							</div>
+							<div class="form-group">
+								{{ form.comments.errors }}
+								<label for="{{ form.comment.id_for_label }}">Comments:</label>
+								{{ form.comment}}
+							</div>
 							<div class="col-md-12" style="height:20vh;">
 								<input class="select-btn btn-lg submission blue" type="submit" value="Submit" name="submission"/>
 							</div>
@@ -137,53 +103,88 @@
 					</div>
 				</div>
 			</div>
-		</div> 
+		</div>
 	</div>
-
-
-<div class="modal fade bd-example-modal-lg alert-warning" id="reportmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      You have reported this claim. Once a certain number of users report a claim, it will automatically be removed. Check the guidelines for reporting for more information.
-
-	<button class="btn-lg green large-text" >
-		<a href="{% url 'polls:poll' %}">Go to next claim</a>
-	</button>
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
+	<div class="modal fade bd-example-modal-lg alert-warning" id="reportmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				You have reported this claim. Once a certain number of users report a claim, it will automatically be removed. Check the guidelines for reporting for more information.
+				<button class="btn-lg green large-text" >
+				<a href="{% url 'polls:poll' %}">Go to next claim</a>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bd-example-modal-lg" data-backdrop="static" id="votemodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				What others think
+				<div class="ct-chart" stlye="width:100%; height:100%;"></div>
+				<div id="stats"></div>
+				
+				<button class="btn-lg blue large-text" style="margin: 40px;">
+				<a href="{{next_url}}">Next claim</a>
+				</button>
+			</div>
+		</div>
+	</div>
 {% endblock content %}
-
 {% block script %}
-
 	<script type="text/javascript">
-  jQuery(document).ready(addClickHandlers());
-
-
-function addClickHandlers() {
-
-jQuery('.report').on('click', function(event) {
-   jQuery.ajax({
-    url: "/polls/report",
-    type: "POST",
-    data: {"no": "{{claim.id}}",}
-       }).done(
-       function(task) {
-       	$('#reportmodal').modal('show')
-       	//window.location.href = task['url']
-       });
-
-  });
-
-
-}
-	</script>	
+	jQuery(document).ready(addClickHandlers());
+	function addClickHandlers() {
+	jQuery('.report').on('click', function(event) {
+	jQuery.ajax({
+	url: "/polls/report",
+	type: "POST",
+	data: {"no": "{{claim.id}}",}
+	}).done(
+	function(task) {
+	$('#reportmodal').modal('show')
+	//window.location.href = task['url']
+	});
+	});
+	jQuery('.yes').on('click', function(event) {
+	jQuery.ajax({
+	url: "/polls/vote",
+	type: "POST",
+	data: {"no": "{{claim.id}}", "answer": "yes"}
+	}).done(
+	function(stats) {
+		var viewportHeight = $('.take_care_of_browser').innerHeight();
+			var viewportWidth = $('.take_care_of_browser').innerWidth();
+	new Chartist.Pie('.ct-chart', {
+	series: [stats['yes'], stats['no']]
+	}, {
+	width:viewportWidth/2,
+	height:viewportHeight/3,
+	});
+	$('#votemodal').modal('show')
+	});
+	});
+	jQuery('.no').on('click', function(event) {
+	jQuery.ajax({
+	url: "/polls/vote",
+	type: "POST",
+	data: {"no": "{{claim.id}}", "answer": "no"}
+	}).done(
+	function(stats) {
+			var viewportHeight = $('.take_care_of_browser').innerHeight();
+			var viewportWidth = $('.take_care_of_browser').innerWidth();
+	new Chartist.Pie('.ct-chart', {
+	series: [stats['yes'], stats['no']]
+	}, {
+	width:viewportWidth/2,
+	height:viewportHeight/3,
+	});
+	$('#votemodal').modal('show')
+	});
+	});
+	}
+	</script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 	
+	<script>
+	</script>
 {% endblock script %}
-

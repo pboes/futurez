@@ -5,6 +5,7 @@
     <div class="col-md-12">
       <p>Logged out!</p>
       <a href="{% url 'login'%}">Click here to login again.</a>
-    </div>
+
+      <p><a href="{% url 'polls:poll'%}">Otherwise, Go to claims directly. </a></p>
   </div>
 {% endblock %}

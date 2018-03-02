@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path(r'add_claim', views.add_claim, name="add_claim"),
+    path(r'vote', views.vote, name="vote"),
     path(r'', views.poll, name="poll"),
     path(r'<int:no>', views.poll, name="poll"),
     # path(r'home', views.home, name="home"),
