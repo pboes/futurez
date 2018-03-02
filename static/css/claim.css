@@ -58,10 +58,6 @@
 		min-width:300px;
 	}
 
-	form {
-		height:100%;
-		/*overflow:scroll;*/
-	}
 
 	label {
 		font-weight:normal;
