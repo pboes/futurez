@@ -58,6 +58,10 @@
 		min-width:300px;
 	}
 
+	form {
+		height:inherit;
+	}
+
 
 	label {
 		font-weight:normal;
