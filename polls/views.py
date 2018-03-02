@@ -47,20 +47,23 @@ def poll(request, no=None):
 				
 		else: 
 			claim = Claim.objects.get(pk= no)
-			vote = Vote(user=request.user, claim=claim)
-			if "skip" in request.POST:
-				claim.skip += 1
-
-			elif "yes" in request.POST:
+			if "yes" in request.POST:
 				claim.yes += 1
-				vote.vote = True
 
 			elif "no" in request.POST:
 				claim.no += 1
-				vote.vote = False
-			
+
 			claim.save()
-			vote.save()
+				
+			if request.user.is_authenticated:
+				vote = Vote(user=request.user, claim=claim)
+				if "yes" in request.POST:
+					vote.vote = True
+
+				elif "no" in request.POST:
+					vote.vote = False
+				vote.save()
+			
 		
 		possible_claims = possible_claims.exclude(pk = no)
 		if len(possible_claims) != 0:
@@ -106,7 +109,7 @@ def report(request):
 	if request.method == 'POST':
 		claim = Claim.objects.get(pk=request.POST['no'])
 		claim.reported += 1
-		report = Report(claim=claim, user= request.user)
+		report = Report(claim=claim)
 
 		if claim.reported >= settings.REPORT_LIMIT:
 			claim.blocked = True

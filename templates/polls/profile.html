@@ -4,12 +4,18 @@
 
 <div class="navbarr">
 
-<a href="{% url 'logout' %}"><i class="fas fa-arrow-circle-left"></i></a>
-
-<a href="{% url 'polls:poll' %}"><i class="fas fa-times-circle"></i></a>
-
+<a href="{% url 'logout' %}"><i class="fas fa-power-off"></i></a>
 
 </div>
+
+<!-- <a href="{% url 'polls:poll' %}"><i class="fas fa-times-circle"></i></a> --> 
+
+<div class="profile-footer">
+<button class="btn-lg green back-to-claim" >
+		<a href="{% url 'polls:poll' %}">Back to claims</a>
+</button>
+</div>
+
 		<div class="padding_top">
 	<div class="row">
 		<!-- Nav tabs -->

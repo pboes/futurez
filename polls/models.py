@@ -27,7 +27,7 @@ class Vote(models.Model):
 	vote = models.NullBooleanField()
 
 class Report(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
 	claim = models.ForeignKey(Claim, on_delete=models.CASCADE)
 
 class Submission(models.Model):
