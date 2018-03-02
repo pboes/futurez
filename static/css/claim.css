@@ -59,7 +59,7 @@
 	}
 
 	form {
-		height:inherit;
+		height:130%;
 	}
 
 
@@ -152,6 +152,12 @@
 		left: 30px;
 		
 	}
+
+	.yes, .no, .report{
+		position:fixed;
+		left: -200px;
+	}
+
 
 	.fa-home {
 		position: fixed;
