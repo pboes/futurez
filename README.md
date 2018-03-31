@@ -1,3 +1,5 @@
 # Futurez
 Futurez is an open-course app, that confronts its users in a playful manner with possible futures. Users vote on specific claims about the future, see how others decide, and can also add their own claims to the mix. In this way, Futurez stimulates its users (we hope) to think about ways in which the world may develop and what their part in this development may be. The data (that is the plan and to be implemented) are freely available (anonymized, of course) and are of interest to future research. 
 As a market researching app, Futurez enables a completely new way of survey, in which the people taking the surveycan suggest and add their own question and thereby enable a more dynamic and more democratic way of surveying. 
+
+You can find the current version running on Heroku at https://futurez.herokuapp.com 
