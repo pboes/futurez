@@ -1,35 +1,27 @@
 {% extends "polls/base.html" %}
 {% block content-base %}
-
-<div class="landing">
-
-<div class="row">
-    <div class="col-md-12">
-      <p class="large-text"><strong> Future up!</strong></p>
-
+  <div class="landing">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="large-text"><strong> Future up!</strong></p>
+      </div>
     </div>
-  </div>
-
-  <div class="row scroll" style="height:60%;">
-    
-
+    <div class="row scroll" style="height:60%;">
+      
       <p>Futurez is what it says on the tin. Get involved with what the world might look like later today, next month, or in 100 years.</p>
-
       <p>Expose yourself to people's ideas about the future and create your own predictions to see what other people think about them.</p>
-
       <p>Futurez is <a href="https://github.com/pboes/claim_and_wonder">open-source</a> and non-profit. Try it now without signing up.</p>
     </div>
   </div>
- 
-   <div class="row">
+  
+  <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
       <button class="btn-lg red large-text" >
       <a href="{% url 'polls:poll' %}">Enter</a>
       </button>
     </div>
   </div>
-
-<!--  <div class="row" style="height:20%;">
+  <!--  <div class="row" style="height:20%;">
     
     <div class="col-lg-6 col-md-6 col-sm-6">
       <button class="btn green large-text" >
@@ -43,7 +35,5 @@
       </button>
     </div>
   </div> -->
-
-  </div>
-
+</div>
 {% endblock %}

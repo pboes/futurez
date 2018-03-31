@@ -22,10 +22,9 @@ urlpatterns = [
     path(r'vote', views.vote, name="vote"),
     path(r'', views.poll, name="poll"),
     path(r'<int:no>', views.poll, name="poll"),
-    # path(r'home', views.home, name="home"),
     path(r'end_of_line', views.end_of_line, name="end_of_line"),
     path(r'profile', views.user_home, name="user_home"),
     path(r'report', views.report, name="report"),
     path(r'submissions', views.submissions, name="submissions"),
     path(r'decide', views.decide, name="decide"),
-    	]
+]

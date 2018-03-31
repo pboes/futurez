@@ -6,6 +6,7 @@ from django.urls import reverse
 
 # Create your views here.
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
